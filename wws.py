@@ -18,9 +18,9 @@ from datetime import datetime
 
 
 def gen_schedule_conf(seconds):
-    path_to_wws = home + "/scripts/wws.py"
+    path_to_wws = home + "/scripts/wws/wws.py"
     path_to_agent = home + "/Library/LaunchAgents/com.porto.wws.plist"
-    args = "-c " + home + "/scripts/wkswarp.yaml"
+    args = "-c " + home + "/scripts/wws/wkswarp.yaml"
 
     text = f"""
     <?xml version="1.0" encoding="UTF-8"?>
@@ -85,7 +85,7 @@ settings = dict()
 if __name__ == '__main__':
     # parser = argparse.ArgumentParser()
     parser = argparse.ArgumentParser(prog="Workspace warp & sync")
-    parser.add_argument("--config", "-c", default=home+"/.wkswarp.yaml", help="Set the configuration file", type=str  ,required=False)
+    parser.add_argument("--config", "-c", default=home+"/scripts/wws/wkswarp.yaml", help="Set the configuration file", type=str  ,required=False)
     parser.add_argument('--test', '-t', action='store_true')
     parser.add_argument('--verbose', '-v', action='store_true')
     parser.add_argument('--start', '-s', action='store_true')
