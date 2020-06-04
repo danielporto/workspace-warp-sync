@@ -1,0 +1,100 @@
+#- {"src":"origin", "dst":["destination"], "driver":"rsync", "opts":"-avh --delete-after" }
+- {
+    "src": "/Volumes/data/Users/dporto/devel/wws",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-github",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/gsd-it-management",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-inesc",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/dotfyles",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-github",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/mpibrasil",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-pmosocial",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/datasets",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/organized-plots",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/bftsmart",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/vftsmart",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/fabric-orderingservice",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
+
+- {
+    "src": "/Volumes/data/Users/dporto/devel/sprint_eval",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/prj_vftsprint/code",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }
