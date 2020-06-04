@@ -123,6 +123,11 @@ if __name__ == '__main__':
                 if args["test"]: # for safety always dry run
                     pprint(out)
     end = datetime.now()
+
+    # notify mac
+    from plumbum.cmd import osascript
+    osascript['-e','display notification "WWS - synchronized!"'].run()
+
     if args["verbose"]: # for safety always dry run
         print(f"duration: {end-start}")
     
