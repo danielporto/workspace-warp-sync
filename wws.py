@@ -12,8 +12,47 @@ home = expanduser("~")
 from datetime import datetime 
 
 
-
 # workspace warp
+
+# http://launched.zerowidth.com/ how to run jobs on mac like cron
+
+
+def gen_schedule_conf(seconds):
+    path_to_wws = home + "/scripts/wws.py"
+    path_to_agent = home + "/Library/LaunchAgents/com.porto.wws.plist"
+    args = "-c " + home + "/scripts/wkswarp.yaml"
+
+    text = f"""
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.porto.wws</string>
+        <key>LimitLoadToSessionType</key>
+        <string>Aqua</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>{path_to_wws}</string>
+            <string>{args}</string>
+        </array>
+        <key>StandardErrorPath</key>
+        <string>/dev/null</string>
+        <key>StandardOutPath</key>
+        <string>/dev/null</string>
+        <key>StartInterval</key>
+        <integer>{seconds}</integer>
+    </dict>
+    </plist>
+    """
+    with open(path_to_agent, "+w") as f:
+        f.writelines(text)
+    # deploy
+    from plumbum.cmd import launchctl
+    launchctl['unload', '-w', path_to_agent].run()
+    launchctl['load', '-w', path_to_agent].run()
+
+    
 
 def _safe_print(msg, **kwargs):
     try:
@@ -49,11 +88,16 @@ if __name__ == '__main__':
     parser.add_argument("--config", "-c", default=home+"/.wkswarp.yaml", help="Set the configuration file", type=str  ,required=False)
     parser.add_argument('--test', '-t', action='store_true')
     parser.add_argument('--verbose', '-v', action='store_true')
-    # parser.add_argument('--update', '-u', action='store_true')
-    # parser.add_argument('--method', '-m', type=str)
+    parser.add_argument('--start', '-s', action='store_true')
+
     args = vars(parser.parse_args())
 
     # pprint(args)
+
+    if args['start']:
+        gen_schedule_conf(3600/4)
+        print("agent started")
+        exit()
 
     data = list()
     with open(args['config'],'r') as f:
