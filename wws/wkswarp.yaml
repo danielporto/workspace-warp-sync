@@ -98,3 +98,12 @@
     "driver": "rsync",
     "opts": ["-avh", "--delete-after"],
   }
+- {
+    "src": "/Volumes/data/Users/dporto/devel/kaioken",
+    "dst":
+      [
+        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/prj_vftsprint/code/kaioken",
+      ],
+    "driver": "rsync",
+    "opts": ["-avh", "--delete-after"],
+  }

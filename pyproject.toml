@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "wws"
+version = "0.1.0"
+description = ""
+authors = ["Daniel Porto <daniel.porto@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+plumbum = "^1.6"
+funcy = "^1.14"
+click = "^7.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
