@@ -1,0 +1,6 @@
+- install_dir: '~/scripts/wws'
+- osx_agent_conf_path: '~/Library/LaunchAgents/com.porto.wws.plist'
+- workspace_warp_database: '~/.wkswarp.yaml'
+- exclude_patterns:
+  - Icon?
+  - .DS_Store
