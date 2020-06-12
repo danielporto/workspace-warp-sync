@@ -3,9 +3,17 @@ from os.path import expanduser
 import commands.utils 
 
 
-class agent:
+class Agent:
     def __init__(self):
         super().__init__()
+
+    def process(self, args):
+        """ process the top level parameters and invoke subcommands 
+        :param: args command line arguments
+        :raise: Environment error when the os is not supported """
+        getattr(self, args['cmd_agent'])(args)
+
+
 
     def configure(self, args):
         if args['verbose']:

@@ -8,9 +8,12 @@ from pprint import pprint
 from funcy import project
 
 
-class sync:
+class Sync:
     def __init__(self):
         super().__init__()
+
+    def process(self, args):
+        getattr(self, args['cmd_sync'])(args)
 
     def up(self, args):
         with open(args['workspace_warp_database'],'r') as f:

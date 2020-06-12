@@ -12,7 +12,8 @@ def agent(args):
     from commands import agent
     if ['verbose']:
         print("agent command invoked")
-    getattr(agent.agent(), args['cmd_agent'])(args)
+    cmd = agent.Agent()
+    cmd.process(args)
 
 def cmd_agent(subparsers):
     subcommand = 'cmd_agent'
@@ -33,7 +34,8 @@ def ls(args):
     from commands import ls
     if ['verbose']:
         print("ls command invoked")
-    getattr(ls.ls(), args['cmd_ls'])(args)
+    cmd = ls.Ls()
+    cmd.process(args)
  
 def cmd_ls(subparsers):
     # ls command
@@ -50,22 +52,20 @@ def add(args):
     """  
         Add workspace command dispatcher
     """
+
     from commands import add
     if ['verbose']:
         print("Add command invoked")
-    getattr(add.add(), args['cmd_add'])(args)
+    cmd = add.Add()
+    cmd.process(args)
  
 def cmd_add(subparsers):
     # add command
-    subcommand = 'cmd_add'
     cmd_parser = subparsers.add_parser('add', help='Add synchronized workspaces')
     cmd_parser.add_argument("-a","--alias", type=str, required=False, help='Specify an alias for the warp point')
+    cmd_parser.add_argument("-s","--src", "--source", type=str, required=False, help='Specify source path')
+    cmd_parser.add_argument("-d","--dst", "--destination", type=str, required=False, help='Specify destination path')
 
-    action_cmd_parser = cmd_parser.add_mutually_exclusive_group(required=True)
-    action_cmd_parser.add_argument('-n','--new',     action='store_const', const='new', dest=subcommand, help='Start the synchronization agent')
-    action_cmd_parser.add_argument('-u','--update',     action='store_const', const='update', dest=subcommand, help='Start the synchronization agent')
-    action_cmd_parser.add_argument('-e','--edit',     action='store_const', const='edit', dest=subcommand, help='Start the synchronization agent')
-    action_cmd_parser.add_argument('-r','--replace',     action='store_const', const='replace', dest=subcommand, help='Start the synchronization agent')
 
 # --------------------- --------------------- --------------------- --------------------- ---------------------
 def rm(args):
@@ -75,7 +75,8 @@ def rm(args):
     from commands import rm
     if ['verbose']:
         print("rm command invoked")
-    getattr(rm.rm(), args['cmd_rm'])(args)
+    cmd = rm.Rm()
+    cmd.process(args)
  
 def cmd_rm(subparsers):
     # ls command
@@ -91,7 +92,9 @@ def sync(args):
     from commands import sync
     if ['verbose']:
         print("Sync command invoked")
-    getattr(sync.sync(), args['cmd_sync'])(args)
+    cmd = sync.Sync()
+    cmd.process(args)
+    
  
 def cmd_sync(subparsers):
     # sync command
@@ -114,8 +117,8 @@ def main():
     import argparse
     main_parser = argparse.ArgumentParser()
     main_parser.add_argument('-v', '--verbose', action = 'store_true', help = "Make the command verbose")
-    main_parser.add_argument( "-c", "--config", default = "~/scripts/wws/settings.yaml", help = "Set the configuration file", type=str  ,required=False)
-    main_parser.add_argument( "-w", "--warp-database", dest='workspace_warp_database', default = "~/.wkswarp.yaml", help = "Set workspace warp file", type=str  ,required=False)
+    main_parser.add_argument( "-c", "--config", default = "./settings.yaml", help = "Set the configuration file", type=str  ,required=False)
+    main_parser.add_argument( "-w", "--warp-database", dest='workspace_warp_database', default = "./wkswarp.yaml", help = "Set workspace warp file", type=str  ,required=False)
     main_parser.add_argument( "-g", "--debug", dest='debug', action='store_true', required=False)
 
     # define commands 

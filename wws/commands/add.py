@@ -1,16 +1,13 @@
+from pprint import pprint
 
-class add:
+class Add:
     def __init__(self):
         super().__init__()
 
-    def new(self):
-        pass
+    def process(self, args):
+        """ edits the warp database  """
+        with open(args['workspace_warp_database'],'r') as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
 
-    def edit(self):
-        pass
-
-    def update(self):
-        pass
-
-    def replace(self):
-        pass
+        # expand 
+   
