@@ -1,120 +1,88 @@
-#- {"src":"origin", "dst":["destination"], "driver":"rsync", "opts":"-avh --delete-after" }
-- {
-    "alias": "wws",
-    "src": "/Volumes/data/Users/dporto/devel/wws",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-github",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "gsdmgmt",
-    "src": "/Volumes/data/Users/dporto/devel/gsd-it-management",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-inesc",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "dotyfiles",
-    "src": "/Volumes/data/Users/dporto/devel/dotfyles",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-github",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "mpibrasil",
-    "src": "/Volumes/data/Users/dporto/devel/mpibrasil",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-pmosocial",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "datasets",
-    "src": "/Volumes/data/Users/dporto/devel/datasets",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "plots",
-    "src": "/Volumes/data/Users/dporto/devel/organized-plots",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "bftsmart",
-    "src": "/Volumes/data/Users/dporto/devel/bftsmart",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "vftsmart",
-    "src": "/Volumes/data/Users/dporto/devel/vftsmart",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "fabric",
-    "src": "/Volumes/data/Users/dporto/devel/fabric-orderingservice",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-
-- {
-    "alias": "sprint",
-    "src": "/Volumes/data/Users/dporto/devel/sprint_eval",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/prj_vftsprint/code",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
-- {
-    "alias": "kaioken",
-    "src": "/Volumes/data/Users/dporto/devel/kaioken",
-    "dst":
-      [
-        "/Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/prj_vftsprint/code/kaioken",
-      ],
-    "driver": "rsync",
-    "opts": ["-avh", "--delete-after"],
-  }
+- alias: wws
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-github
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/wws
+- alias: gsdmgmt
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-inesc
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/gsd-it-management
+- alias: dotyfiles
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-github
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/dotfyles
+- alias: mpibrasil
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-pmosocial
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/mpibrasil
+- alias: datasets
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/datasets
+- alias: plots
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/organized-plots
+- alias: bftsmart
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/bftsmart
+- alias: vftsmart
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/vftsmart
+- alias: fabric
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/2020
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/fabric-orderingservice
+- alias: sprint
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/prj_vftsprint/code
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/sprint_eval
+- alias: kaioken
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Google Drive File Stream/My Drive/code/wksp-vftsprint/prj_vftsprint/code/kaioken
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/devel/kaioken

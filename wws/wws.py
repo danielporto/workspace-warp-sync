@@ -63,8 +63,8 @@ def cmd_add(subparsers):
     # add command
     cmd_parser = subparsers.add_parser('add', help='Add synchronized workspaces')
     cmd_parser.add_argument("-a","--alias", type=str, required=False, help='Specify an alias for the warp point')
-    cmd_parser.add_argument("-s","--src", "--source", type=str, required=False, help='Specify source path')
-    cmd_parser.add_argument("-d","--dst", "--destination", type=str, required=False, help='Specify destination path')
+    cmd_parser.add_argument("-s","--src", "--source", type=str, required=True, help='Specify source path')
+    cmd_parser.add_argument("-d","--dst", "--destination", nargs='+', required=True, help='Specify destination path')
 
 
 # --------------------- --------------------- --------------------- --------------------- ---------------------
