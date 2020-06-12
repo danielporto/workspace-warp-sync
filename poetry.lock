@@ -94,6 +94,14 @@ python-versions = "*"
 version = "0.1"
 
 [[package]]
+category = "main"
+description = "Colorize the print statement by global or inline flags"
+name = "printy"
+optional = false
+python-versions = ">=3.5"
+version = "2.0.1"
+
+[[package]]
 category = "dev"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
 name = "py"
@@ -160,7 +168,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "30a41acd9b039611e57b21b6cf61a3818948b137993f8080ad59f8881dd5afa9"
+content-hash = "8d01c3f6eb4e82bc1838f5d8be6f8df1132fecef5e04acc9dcaa6f66f9697801"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -197,6 +205,10 @@ plumbum = [
 ]
 pprint = [
     {file = "pprint-0.1.tar.gz", hash = "sha256:c0fa22d1462351671ca098e9779bb26a23880011e93eea5f199a150ee7b92a16"},
+]
+printy = [
+    {file = "printy-2.0.1-py3-none-any.whl", hash = "sha256:35bab6164b776b5eb127999e8f0c15d0b255a8a972dc45ae15ec9665d5bd97fc"},
+    {file = "printy-2.0.1.tar.gz", hash = "sha256:e56ec11b30f290d8ff38bc56b865428dc94702baf38f8fff9659cc8dca620466"},
 ]
 py = [
     {file = "py-1.8.1-py2.py3-none-any.whl", hash = "sha256:c20fdd83a5dbc0af9efd622bee9a5564e278f6380fffcacc43ba6f43db2813b0"},

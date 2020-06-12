@@ -14,6 +14,7 @@ funcy = "^1.14"
 pyyaml = "^5.3"
 pprint = "^0.1"
 tabulate = "^0.8.7"
+printy = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"

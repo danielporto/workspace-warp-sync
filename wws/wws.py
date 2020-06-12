@@ -82,8 +82,10 @@ def cmd_rm(subparsers):
     # ls command
     subcommand = 'cmd_rm'
     cmd_parser = subparsers.add_parser('rm', help='Remove synchronized workspaces')
-    # action_cmd_parser = cmd_parser.add_mutually_exclusive_group(required=True)
-    # action_cmd_parser.add_argument('-s','--start',     action='store_const', const='start', dest=subcommand, help='Start the synchronization agent')
+    cmd_parser.add_argument("-a","--alias", nargs="+", required=True, help='Specify an alias for the warp point')
+    # cmd_parser.add_argument("-s","--src", "--source", type=str, required=False, help='Specify source path')
+    # cmd_parser.add_argument("-d","--dst", "--destination", nargs='+', required=False, help='Specify destination path')
+
 # --------------------- --------------------- --------------------- --------------------- ---------------------
 def sync(args):
     """  
