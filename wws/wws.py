@@ -107,6 +107,8 @@ def cmd_sync(subparsers):
     action_cmd_parser = cmd_parser.add_mutually_exclusive_group(required=True)
     action_cmd_parser.add_argument('--up', action='store_const', const='up', dest=subcommand, help='Copy data from local to remote')
     action_cmd_parser.add_argument('--down', action='store_const', const='down', dest=subcommand, help='Copy data from remote to local')
+    action_cmd_parser.add_argument('--fetch', action='store_const', const='fetch', dest=subcommand, help='Get a directory from remote nodes if the current does not exists')
+    action_cmd_parser.add_argument('--push', action='store_const', const='push', dest=subcommand, help='Copy local diretory to remote nodes if the remote nodes not exists')
 
 
 # --------------------- --------------------- --------------------- --------------------- ---------------------
