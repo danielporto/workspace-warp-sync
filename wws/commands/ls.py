@@ -12,6 +12,7 @@ class Ls:
         with open(args['workspace_warp_database'],'r') as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
 
+        # when ls, verify which dir exists and mark import emoji
 
         if args['alias']:
             data = [ d for d in data if any( [ a for a in args['alias'] if a.upper() in d['alias'].upper() ]  )    ]

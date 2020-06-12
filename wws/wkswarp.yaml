@@ -86,3 +86,11 @@
   - -avh
   - --delete-after
   src: /Volumes/data/Users/dporto/devel/kaioken
+- alias: test
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/Documents2
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/Documents
