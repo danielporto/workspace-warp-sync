@@ -9,7 +9,6 @@ def load_settings(path):
 
 
 
-
 def _safe_print(msg, **kwargs):
     try:
         print(msg, **kwargs)

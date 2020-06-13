@@ -105,11 +105,10 @@ def cmd_sync(subparsers):
     cmd_parser = subparsers.add_parser('sync', help='Sync command to force  operations on workspaces')
     cmd_parser.add_argument("--dry-run", action='store_true', required=False, help='Non destructive operation, don\'t actually copies anything')
     cmd_parser.add_argument("-a","--alias", nargs='+', required=False, help='specify the item or items to selective sync')
+    cmd_parser.add_argument('--force', action='store_true', help='force synchronize operations creating dirs when necessary')
     action_cmd_parser = cmd_parser.add_mutually_exclusive_group(required=True)
     action_cmd_parser.add_argument('--up', action='store_const', const='up', dest=subcommand, help='Copy data from local to remote')
     action_cmd_parser.add_argument('--down', action='store_const', const='down', dest=subcommand, help='Copy data from remote to local')
-    action_cmd_parser.add_argument('--fetch', action='store_const', const='fetch', dest=subcommand, help='Get a directory from remote nodes if the current does not exists')
-    action_cmd_parser.add_argument('--push', action='store_const', const='push', dest=subcommand, help='Copy local diretory to remote nodes if the remote nodes not exists')
 
 
 # --------------------- --------------------- --------------------- --------------------- ---------------------

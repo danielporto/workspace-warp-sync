@@ -94,3 +94,11 @@
   - -avh
   - --delete-after
   src: /Volumes/data/Users/dporto/Documents
+- alias: abc
+  driver: rsync
+  dst:
+  - /Volumes/data/Users/dporto/aaa/dir2
+  opts:
+  - -avh
+  - --delete-after
+  src: /Volumes/data/Users/dporto/aaa/dir1
