@@ -2,7 +2,7 @@ import platform
 from os.path import expanduser
 import commands.utils 
 
-
+OSX_AGENT_CONF_PATH = '~/Library/LaunchAgents/com.porto.wws.plist'
 class Agent:
     def __init__(self):
         super().__init__()
@@ -74,10 +74,10 @@ class Agent:
 
 
 def _configure_osx_timer(args):
-    script_path = expanduser(args['install_dir'] + '/wws.py')
+    script_path = utils.get_script_path()
     configuration_file_path = expanduser(args['settings'])
     database_file_path = expanduser(args['workspace_warp_database'])
-    osxagent_file_path = expanduser(args['osx_agent_conf_path'])
+    osxagent_file_path = expanduser(OSX_AGENT_CONF_PATH)
 
     seconds = int(args['timer'])
 

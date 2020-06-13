@@ -1,9 +1,29 @@
 import yaml
 from printy import printy, inputy
+from os import path
+from os.path import expanduser
 
 
-def load_settings(path):
-    with open(path,'r') as f:
+def init(conf_path):
+    if not _confirm(f"The configuration file does not exist at {conf_path}, initialize one?"):
+        print("Aborting initialization")
+        exit()
+
+    settings = [ {"workspace_warp_database": "~/.wws_data.yaml" }, {"exclude_patterns": ["Icon?",".DS_Store"]} ]
+    with open(conf_path,'w+') as f:
+        f.seek(0)
+        f.truncate()
+        yaml.dump(settings, f, default_flow_style=False)
+    
+    
+
+def load_settings(conf_path):
+    conf_path = expanduser(conf_path)
+
+    if not path.exists(conf_path):
+        init(conf_path)
+
+    with open(conf_path,'r') as f:
         settings = yaml.load(f, Loader=yaml.FullLoader)
     return settings
 
@@ -31,6 +51,13 @@ def _local_with_brew_check(pkg):
             return None
 
     return local.get(pkg, '/usr/local/bin/'+pkg)
+
+
+import os
+import sys
+
+def get_script_path():
+    return os.path.realpath(sys.argv[0])
 
 
 # Prompt the yes/no-*question* to the user

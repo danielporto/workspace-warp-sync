@@ -11,6 +11,8 @@ class Add:
             pprint(args)
         with open(args['workspace_warp_database'],'r+') as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
+            if not data:
+                data = []
         
             # expand 
             args['src'] = abspath(args['src'])

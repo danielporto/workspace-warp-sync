@@ -20,6 +20,9 @@ class Sync:
     def up(self, args):
         with open(args['workspace_warp_database'],'r') as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
+            if not data:
+                data = []
+
 
         # filter only the selected aliases
         if args['alias']:
@@ -86,6 +89,9 @@ class Sync:
     def down(self, args):
         with open(args['workspace_warp_database'],'r') as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
+            if not data:
+                data = []
+
 
         # filter only the selected aliases
         if args['alias']:

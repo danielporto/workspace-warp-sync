@@ -121,8 +121,8 @@ def main():
     import argparse
     main_parser = argparse.ArgumentParser()
     main_parser.add_argument('-v', '--verbose', action = 'store_true', help = "Make the command verbose")
-    main_parser.add_argument( "-c", "--config", default = "./settings.yaml", help = "Set the configuration file", type=str  ,required=False)
-    main_parser.add_argument( "-w", "--warp-database", dest='workspace_warp_database', default = "./wkswarp.yaml", help = "Set workspace warp file", type=str  ,required=False)
+    main_parser.add_argument( "-c", "--config", default = "~/.wws_settings.yaml", help = "Set the configuration file", type=str  ,required=False)
+    main_parser.add_argument( "-w", "--warp-database", default = "~/.wws_data.yaml", dest='workspace_warp_database', help = "Set workspace warp file", type=str  ,required=False)
     main_parser.add_argument( "-g", "--debug", dest='debug', action='store_true', required=False)
 
     # define commands 
@@ -147,7 +147,15 @@ def main():
     # join settings overriding the default for command line  
     args = merge(default_options, args)
     
-    
+    args['workspace_warp_database'] = path.expanduser(args['workspace_warp_database'])
+    if not path.exists(args['workspace_warp_database']):
+        if not utils._confirm(f"Warp database not found, initialize an empty one at {args['workspace_warp_database']}?"):
+            print("Database initialization aborted")
+            exit()
+
+        with open(args['workspace_warp_database'],'w+') as f:
+            pass
+
     if args['debug'] or args['verbose']:
         pprint(args)
 

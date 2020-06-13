@@ -14,6 +14,9 @@ class Rm:
             pprint(args)
         with open(args['workspace_warp_database'],'r+') as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
+            if not data:
+                data = []
+
         
             remove_entries = dict()
             keep_entries = dict()

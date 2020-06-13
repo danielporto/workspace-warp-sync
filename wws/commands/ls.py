@@ -13,6 +13,9 @@ class Ls:
         """ opens the warp database and print its content """
         with open(args['workspace_warp_database'],'r') as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
+            if not data:
+                data = []
+
 
         # when ls, verify which dir exists and mark import emoji
 
