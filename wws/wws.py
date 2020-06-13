@@ -44,8 +44,9 @@ def cmd_ls(subparsers):
     cmd_parser.add_argument("-a","--alias", nargs='+', required=False, help='specify the item or items to list')
     cmd_parser.add_argument("-o","--with-options", action = 'store_true', required=False, help='print detailed options')
 
-    # action_cmd_parser = cmd_parser.add_mutually_exclusive_group(required=True)
-    # action_cmd_parser.add_argument('-s','--start',     action='store_const', const='start', dest=subcommand, help='Start the synchronization agent')
+    action_cmd_parser = cmd_parser.add_mutually_exclusive_group(required=False)
+    action_cmd_parser.add_argument('-e','--tree', action='store_const', const = "tree", default = 'tree', dest='format', help='print output in tree format')
+    action_cmd_parser.add_argument('-t','--table', action='store_const', const = "table", dest='format', help='print output in table format')
 
 # --------------------- --------------------- --------------------- --------------------- ---------------------
 def add(args):
@@ -150,6 +151,8 @@ def main():
     
     if args['debug'] or args['verbose']:
         pprint(args)
+
+    # make sure binaries we use exists (rsync and rclone in the future)
 
     # invoke command
     getattr(sys.modules[__name__], args['cmd_main'])(args)

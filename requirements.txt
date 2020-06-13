@@ -1,3 +1,5 @@
+emoji==0.5.4 \
+    --hash=sha256:60652d3a2dcee5b8af8acb097c31776fb6d808027aeb7221830f72cdafefc174
 funcy==1.14 \
     --hash=sha256:75ee84c3b446f92e68a857c2267b15a1b49c631c9d5a87a5f063cd2d6761a5c4
 plumbum==1.6.9 \

@@ -31,6 +31,17 @@ version = "0.4.3"
 
 [[package]]
 category = "main"
+description = "Emoji for Python"
+name = "emoji"
+optional = false
+python-versions = "*"
+version = "0.5.4"
+
+[package.extras]
+dev = ["nose", "coverage", "coveralls"]
+
+[[package]]
+category = "main"
 description = "A fancy and practical functional tools"
 name = "funcy"
 optional = false
@@ -168,7 +179,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "8d01c3f6eb4e82bc1838f5d8be6f8df1132fecef5e04acc9dcaa6f66f9697801"
+content-hash = "e70fb26572ca56b6821b4185c4cfa1cd57335687723899dc8324b9d7c689aa20"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -183,6 +194,9 @@ attrs = [
 colorama = [
     {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
+]
+emoji = [
+    {file = "emoji-0.5.4.tar.gz", hash = "sha256:60652d3a2dcee5b8af8acb097c31776fb6d808027aeb7221830f72cdafefc174"},
 ]
 funcy = [
     {file = "funcy-1.14.tar.gz", hash = "sha256:75ee84c3b446f92e68a857c2267b15a1b49c631c9d5a87a5f063cd2d6761a5c4"},

@@ -15,6 +15,7 @@ pyyaml = "^5.3"
 pprint = "^0.1"
 tabulate = "^0.8.7"
 printy = "^2.0.1"
+emoji = "^0.5.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
