@@ -28,6 +28,10 @@ class Rm:
             else:
                 data = remove_entries
 
+            if not data:
+                print("Nothing to remove.")
+                exit()
+            
             print("Entries to remove:")
             print(tabulate(data, headers="keys", tablefmt = "psql"))
             rm = utils._confirm("Are you sure to remove these entries?")
@@ -37,6 +41,7 @@ class Rm:
                 f.truncate()
                 yaml.dump(keep_entries, f, default_flow_style=False)
 
-            rm = utils._confirm("Aliases were removed. please remove the current directory.")
+            print("Aliases were removed but data remain untouched. Please remove the listed source directories.")
+
 
             
