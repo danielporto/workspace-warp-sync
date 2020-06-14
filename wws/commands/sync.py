@@ -7,8 +7,7 @@ from plumbum.cmd import rsync
 from pprint import pprint
 from funcy import project
 from wws.commands import utils
-
-
+import time
 class Sync:
     def __init__(self):
         super().__init__()
@@ -27,6 +26,7 @@ class Sync:
         if args['alias']:
             data = [ d for d in data if any( [ a for a in args['alias'] if a.upper() in d['alias'].upper() ])]
 
+        start = time.time()
         # synchronize warp points
         for item in data:
 
@@ -81,6 +81,11 @@ class Sync:
                 out = rsync[params].run() 
                 if args["debug"] or args['dry_run']: 
                     pprint(out) 
+        
+        end = time.time()
+        from plumbum.cmd import osascript
+        osascript['-e',f'display notification "[WWS] Workspace synchronized in {int(end - start)} seconds!"'].run()
+
 
  
 
@@ -96,6 +101,7 @@ class Sync:
         if args['alias']:
             data = [ d for d in data if any( [ a for a in args['alias'] if a.upper() in d['alias'].upper() ])]
 
+        start = time.time()
         # synchronize warp points
         for item in data:
 
@@ -154,4 +160,6 @@ class Sync:
             if args["debug"] or args['dry_run']: 
                 pprint(out) 
 
- 
+        end = time.time()
+        from plumbum.cmd import osascript
+        osascript['-e',f'display notification "[WWS] Workspace synchronized in {int(end - start)} seconds!"'].run()
