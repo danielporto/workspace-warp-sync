@@ -1,8 +1,13 @@
 import platform
+import os
 from os.path import expanduser
-import commands.utils 
+from pprint import pprint
+from commands.utils  import *
+import re
 
 OSX_AGENT_CONF_PATH = '~/Library/LaunchAgents/com.porto.wws.plist'
+OSX_AGENT_PROCESS_NAME = 'com.porto.wws'
+
 class Agent:
     def __init__(self):
         super().__init__()
@@ -31,20 +36,40 @@ class Agent:
 
 
     def start(self, args):
+        global OSX_AGENT_CONF_PATH
+
         if 'Darwin' not in platform.system():
             raise EnvironmentError("Unsupported operating system - only Mac OSX is supported right now")
+
+        OSX_AGENT_CONF_PATH = expanduser(OSX_AGENT_CONF_PATH)
+        if not os.path.exists(OSX_AGENT_CONF_PATH):
+            print("Agent is not configured, aborting")
+            exit()
 
         from plumbum.cmd import launchctl
 
         if args['verbose']: 
             print("Deploying new agent")
 
-        launchctl['load', '-w', osxagent_file_path].run()
+        out = launchctl['load', '-w', OSX_AGENT_CONF_PATH].run()
+        
+        if any('already' in l for l in map(str,out)):
+            print("Agent is already loaded.")
+        else:
+            print("Agent started.")
+
 
 
     def stop(self, args):
+        global OSX_AGENT_CONF_PATH
+        OSX_AGENT_CONF_PATH = expanduser(OSX_AGENT_CONF_PATH)
+
         if 'Darwin' not in platform.system():
             raise EnvironmentError("Unsupported operating system - only Mac OSX is supported right now")
+
+        if not os.path.exists(OSX_AGENT_CONF_PATH):
+            print("Agent is not configured, aborting")
+            exit()
 
         from plumbum.cmd import launchctl
 
@@ -52,7 +77,11 @@ class Agent:
             print("Command agent stop was called.")
             print("Undeploying old agent")
 
-        launchctl['unload', '-w', osxagent_file_path].run()
+        out = launchctl['unload', '-w', OSX_AGENT_CONF_PATH].run()
+        if any('not find' in l for l in map(str,out)):
+            print("Agent is already stopped.")
+        else:
+            print("Agent stopped.")
 
 
 
@@ -64,18 +93,42 @@ class Agent:
         
 
     def status(self, args):
+        global OSX_AGENT_CONF_PATH
+        osxagent_file_path = expanduser(OSX_AGENT_CONF_PATH)
+
+
         if 'Darwin' not in platform.system():
             raise EnvironmentError("Unsupported operating system - only Mac OSX is supported right now")
 
         if args['verbose']:
             print("Command agent status was called.")
+        from plumbum.cmd import launchctl
+        out = launchctl['list'].run() 
+        processes = [ i.split('\t')[2] for i in out[1].split('\n') if len(i.split('\t')) == 3 ]
+        if OSX_AGENT_PROCESS_NAME in processes:
+            print("Agent is running.")
+            these_regex="<integer>(.+?)</integer>"
+            pattern=re.compile(these_regex)
+
+            with open(osxagent_file_path, 'r') as f:
+                content = f.readlines()
+                timerline = [ l for l in content if 'integer' in l ]
+                timerline = re.findall(pattern, timerline[0])[0]
+                print(f"It will fire periodically every {timerline} seconds.")
+
+        else:
+            print("Agent is not running.")
 
 
 
 
 def _configure_osx_timer(args):
-    script_path = utils.get_script_path()
-    configuration_file_path = expanduser(args['settings'])
+    global OSX_AGENT_CONF_PATH
+    global OSX_AGENT_PROCESS_NAME
+
+    pprint(args)
+    script_path = get_script_path()
+    configuration_file_path = expanduser(args['config'])
     database_file_path = expanduser(args['workspace_warp_database'])
     osxagent_file_path = expanduser(OSX_AGENT_CONF_PATH)
 
@@ -86,7 +139,7 @@ def _configure_osx_timer(args):
     <plist version="1.0">
     <dict>
         <key>Label</key>
-        <string>com.porto.wws</string>
+        <string>{OSX_AGENT_PROCESS_NAME}</string>
         <key>ProgramArguments</key>
         <array>
             <string>/usr/local/bin/python3</string>
@@ -107,7 +160,7 @@ def _configure_osx_timer(args):
         
     with open(osxagent_file_path, "+w") as f:
         f.writelines(text)
-    
+    print("Agent configured.")
 
 def _configure_linux_timer(args):
     raise EnvironmentError("Unsupported OS")

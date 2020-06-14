@@ -23,6 +23,7 @@ def cmd_agent(subparsers):
     action_cmd_parser.add_argument('-p','--stop',      action='store_const', const='stop', dest=subcommand, help='Stop the synchronization agent')
     action_cmd_parser.add_argument('-r','--reload',    action='store_const', const='reload', dest=subcommand, help='Reload the synchronization agent')
     action_cmd_parser.add_argument('-c','--configure', action='store_const', const='configure', dest=subcommand, help='Configure the synchronization agent')
+    action_cmd_parser.add_argument('-u','--status', action='store_const', const='status', dest=subcommand, help='Configure the synchronization agent')
     cmd_parser.add_argument("--timer", "-t", default=1200, type=int  ,required=False)
 
 # --------------------- --------------------- --------------------- --------------------- ---------------------

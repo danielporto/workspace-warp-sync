@@ -1,4 +1,0 @@
-- workspace_warp_database: "~/.wkswarp.yaml"
-- exclude_patterns:
-    - Icon?
-    - .DS_Store
