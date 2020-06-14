@@ -2,7 +2,7 @@ import platform
 import os
 from os.path import expanduser
 from pprint import pprint
-from commands.utils  import *
+from wws.commands.utils  import *
 import re
 
 OSX_AGENT_CONF_PATH = '~/Library/LaunchAgents/com.porto.wws.plist'

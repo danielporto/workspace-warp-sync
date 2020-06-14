@@ -1,7 +1,7 @@
 # https://hackersandslackers.com/python-poetry-package-manager/
 [tool.poetry]
 name = "wws"
-version = "0.1.1"
+version = "0.1.4"
 description = "A simple utility to synchronize local and remote paths"
 authors = ["Daniel Porto <daniel.porto@gmail.com>"]
 license = "MIT"
@@ -20,8 +20,10 @@ emoji = "^0.5.4"
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
 
+# this block defines how the executable is called.
+# <cli alias> = "<python module(dir)>:<python module (script name)>"
 [tool.poetry.scripts]
-wws = "wws:main"
+wws = "wws:wws"
 
 [build-system]
 requires = ["poetry>=1.0.9"]

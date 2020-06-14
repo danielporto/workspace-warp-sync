@@ -1,15 +1,15 @@
 #! env python3
 import sys
-from pprint import pprint
 from os import path
-import commands.utils as utils
+from pprint import pprint
 from funcy import merge
+from wws.commands import utils
 
 def agent(args):
     """  
         Synchronization agent command dispatcher
     """
-    from commands import agent
+    from wws.commands import agent
     if ['verbose']:
         print("agent command invoked")
     cmd = agent.Agent()
@@ -32,7 +32,7 @@ def ls(args):
     """  
         List workspace command dispatcher
     """
-    from commands import ls
+    from wws.commands import ls
     if ['verbose']:
         print("ls command invoked")
     cmd = ls.Ls()
@@ -55,7 +55,7 @@ def add(args):
         Add workspace command dispatcher
     """
 
-    from commands import add
+    from wws.commands import add
     if ['verbose']:
         print("Add command invoked")
     cmd = add.Add()
@@ -74,7 +74,7 @@ def rm(args):
     """  
         Remove workspace command dispatcher
     """
-    from commands import rm
+    from wws.commands import rm
     if ['verbose']:
         print("rm command invoked")
     cmd = rm.Rm()
@@ -93,7 +93,7 @@ def sync(args):
     """  
         Sync workspace command dispatcher
     """
-    from commands import sync
+    from wws.commands import sync
     if ['verbose']:
         print("Sync command invoked")
     cmd = sync.Sync()

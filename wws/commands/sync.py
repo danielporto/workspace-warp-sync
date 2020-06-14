@@ -1,4 +1,3 @@
-import commands.utils 
 import yaml
 from os import path
 from os.path import expanduser
@@ -7,7 +6,7 @@ from plumbum import local, FG, BG, TF, RETCODE
 from plumbum.cmd import rsync
 from pprint import pprint
 from funcy import project
-from commands import utils
+from wws.commands import utils
 
 
 class Sync:

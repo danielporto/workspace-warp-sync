@@ -2,7 +2,7 @@ from pprint import pprint
 import yaml
 from tabulate import tabulate
 from funcy import project
-from commands import utils
+from wws.commands import utils
 
 class Rm:
     def __init__(self):
