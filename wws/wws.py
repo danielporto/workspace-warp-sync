@@ -1,6 +1,6 @@
 #! env python3
 import sys
-from os import path
+import os
 from pprint import pprint
 from funcy import merge
 from wws.commands import utils
@@ -122,8 +122,8 @@ def main():
     import argparse
     main_parser = argparse.ArgumentParser()
     main_parser.add_argument('-v', '--verbose', action = 'store_true', help = "Make the command verbose")
-    main_parser.add_argument( "-c", "--config", default = "~/.wws_settings.yaml", help = "Set the configuration file", type=str  ,required=False)
-    main_parser.add_argument( "-w", "--warp-database", default = "~/.wws_data.yaml", dest='workspace_warp_database', help = "Set workspace warp file", type=str  ,required=False)
+    main_parser.add_argument( "-c", "--config", default = "~/.wws/settings.yaml", help = "Set the configuration file", type=str  ,required=False)
+    main_parser.add_argument( "-w", "--warp-database", default = "~/.wws/data.yaml", dest='workspace_warp_database', help = "Set workspace warp file", type=str  ,required=False)
     main_parser.add_argument( "-g", "--debug", dest='debug', action='store_true', required=False)
 
     # define commands 
@@ -138,22 +138,44 @@ def main():
     # flatten arguments and invoke command dispatcher
     args = vars(main_parser.parse_args())
     
+    # initialize settings
+    args['config'] = os.path.expanduser(args['config'])
+    # if the file exists
+    if not os.path.exists(args['config']):
+        if not utils._confirm(f"Workspace Warp settings not found, initialize an empty one at {args['config']}?"):
+            print("Database initialization aborted. WWS was not configured.")
+            exit()
+        # if the directory of the file exists
+        if not os.path.exists(os.path.dirname(args['config'])):
+            if args['debug']:
+                print("Creating configuration directory: %s " ,os.path.dirname(args['config']))
+            # create the dir
+            os.mkdir(os.path.dirname(args['config']))
+        # create the file
+        utils.init(args['config'])
+
     # load settings
     settings = utils.load_settings(args['config'])
-    default_options = dict()
+    
     # coalesce a list of dicts into a single dict
+    default_options = dict()
     for conf in settings:
         default_options =  merge(default_options, conf)
-
     # join settings overriding the default for command line  
     args = merge(default_options, args)
     
-    args['workspace_warp_database'] = path.expanduser(args['workspace_warp_database'])
-    if not path.exists(args['workspace_warp_database']):
+    args['workspace_warp_database'] = os.path.expanduser(args['workspace_warp_database'])
+    if not os.path.exists(args['workspace_warp_database']):
         if not utils._confirm(f"Warp database not found, initialize an empty one at {args['workspace_warp_database']}?"):
             print("Database initialization aborted")
             exit()
 
+        if not os.path.exists(os.path.dirname(args['workspace_warp_database'])):
+            if args['debug']:
+                print("Creating configuration directory: %s " ,os.path.dirname(args['workspace_warp_database']))
+            # create the dir
+            os.mkdir(os.path.dirname(args['workspace_warp_database']))
+        # just create an emtpy file
         with open(args['workspace_warp_database'],'w+') as f:
             pass
 

@@ -5,10 +5,6 @@ from os.path import expanduser
 
 
 def init(conf_path):
-    if not _confirm(f"The configuration file does not exist at {conf_path}, initialize one?"):
-        print("Aborting initialization")
-        exit()
-
     settings = [ {"workspace_warp_database": "~/.wws_data.yaml" }, {"exclude_patterns": ["Icon?",".DS_Store"]} ]
     with open(conf_path,'w+') as f:
         f.seek(0)
@@ -21,7 +17,8 @@ def load_settings(conf_path):
     conf_path = expanduser(conf_path)
 
     if not path.exists(conf_path):
-        init(conf_path)
+        print("Abort, configuration settings file not found.")
+        exit()
 
     with open(conf_path,'r') as f:
         settings = yaml.load(f, Loader=yaml.FullLoader)
