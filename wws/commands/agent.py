@@ -4,6 +4,7 @@ from os.path import expanduser
 from pprint import pprint
 from wws.commands.utils  import *
 import re
+from plumbum.cmd import launchctl
 
 OSX_AGENT_CONF_PATH = '~/Library/LaunchAgents/com.porto.wws.plist'
 OSX_AGENT_PROCESS_NAME = 'com.porto.wws'
@@ -46,7 +47,6 @@ class Agent:
             print("Agent is not configured, aborting")
             exit()
 
-        from plumbum.cmd import launchctl
 
         if args['verbose']: 
             print("Deploying new agent")
@@ -70,8 +70,6 @@ class Agent:
         if not os.path.exists(OSX_AGENT_CONF_PATH):
             print("Agent is not configured, aborting")
             exit()
-
-        from plumbum.cmd import launchctl
 
         if args['verbose']:
             print("Command agent stop was called.")
@@ -102,7 +100,7 @@ class Agent:
 
         if args['verbose']:
             print("Command agent status was called.")
-        from plumbum.cmd import launchctl
+
         out = launchctl['list'].run() 
         processes = [ i.split('\t')[2] for i in out[1].split('\n') if len(i.split('\t')) == 3 ]
         if OSX_AGENT_PROCESS_NAME in processes:
@@ -144,6 +142,7 @@ def _configure_osx_timer(args):
         <array>
             <string>/usr/local/bin/python3</string>
             <string>{script_path}</string>
+            <string>agent</string>
             <string>-c</string>
             <string>{configuration_file_path}</string>
             <string>-d</string>
