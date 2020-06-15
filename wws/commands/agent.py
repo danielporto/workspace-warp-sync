@@ -142,11 +142,12 @@ def _configure_osx_timer(args):
         <array>
             <string>/usr/local/bin/python3</string>
             <string>{script_path}</string>
-            <string>agent</string>
             <string>-c</string>
             <string>{configuration_file_path}</string>
-            <string>-d</string>
+            <string>-w</string>
             <string>{database_file_path}</string>
+            <string>sync</string>
+            <string>--up</string>
         </array>
         <key>StandardErrorPath</key>
         <string>/tmp/wws.err</string>
