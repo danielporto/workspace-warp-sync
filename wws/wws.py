@@ -65,8 +65,8 @@ def cmd_add(subparsers):
     # add command
     cmd_parser = subparsers.add_parser('add', help='Add synchronized workspaces')
     cmd_parser.add_argument("-a","--alias", type=str, required=False, help='Specify an alias for the warp point')
-    cmd_parser.add_argument("-s","--src", "--source", type=str, required=True, help='Specify source path')
-    cmd_parser.add_argument("-d","--dst", "--destination", nargs='+', required=True, help='Specify destination path')
+    cmd_parser.add_argument("-l","--local", type=str, required=True, help='Specify local path')
+    cmd_parser.add_argument("-r","--remote",nargs='+', required=True, help='Specify remote path')
 
 
 # --------------------- --------------------- --------------------- --------------------- ---------------------
@@ -152,7 +152,7 @@ def main():
             # create the dir
             os.mkdir(os.path.dirname(args['config']))
         # create the file
-        utils.init(args['config'])
+        utils.init(args)
 
     # load settings
     settings = utils.load_settings(args['config'])
@@ -161,6 +161,7 @@ def main():
     default_options = dict()
     for conf in settings:
         default_options =  merge(default_options, conf)
+        
     # join settings overriding the default for command line  
     args = merge(default_options, args)
     
@@ -178,6 +179,8 @@ def main():
         # just create an emtpy file
         with open(args['workspace_warp_database'],'w+') as f:
             pass
+    else:
+        utils.migrate_database(args)
 
     if args['debug'] or args['verbose']:
         pprint(args)

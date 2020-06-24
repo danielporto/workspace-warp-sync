@@ -27,7 +27,7 @@ class Rm:
 
             
             if not args['verbose']:
-                data = [ project(d,['alias', 'src', 'dst' ]) for d in remove_entries] 
+                data = [ project(d,['alias', 'local', 'remote' ]) for d in remove_entries] 
             else:
                 data = remove_entries
 

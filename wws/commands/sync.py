@@ -30,15 +30,15 @@ class Sync:
         # synchronize warp points
         for item in data:
 
-            if not path.exists(item['src']):
+            if not path.exists(item['local']):
                 if args['debug'] or args['verbose']:
-                    print(f"Source path '{item['src']}' does not exits, skipping.")
+                    print(f"Source path '{item['local']}' does not exits, skipping.")
                     continue
 
             if args['debug'] or args['verbose']:
-                print(f"synchronizing {item['src']}")
+                print(f"synchronizing {item['local']}")
 
-            for dst in item['dst']:
+            for dst in item['remote']:
                 # this approach need rework for remote locations (rsync over ssh)...
                 if not path.exists(dst): 
                     if args['force']:
@@ -63,14 +63,14 @@ class Sync:
                     params.extend(item['opts'])
 
                 # fix source and destination
-                if item['src'][-1] is not '/':
-                    item['src'] += '/'
+                if item['local'][-1] is not '/':
+                    item['local'] += '/'
                 if dst[-1] is not '/':
                     dst += '/'
                 
 
                 # finish with source -> dest
-                params.append(item['src'])
+                params.append(item['local'])
                 params.append(dst)
                 if args['debug']:
                     pprint(params)
@@ -105,22 +105,22 @@ class Sync:
         # synchronize warp points
         for item in data:
 
-            if not path.exists(item['src']):
+            if not path.exists(item['local']):
                 if args['force']:
                     print("Force creating local directory")
                     if not args['dry_run']:
-                        pathlib.Path(item['src']).mkdir(parents=True, exist_ok=True)    
+                        pathlib.Path(item['local']).mkdir(parents=True, exist_ok=True)    
                 else:
                     if args['debug'] or args['verbose']:
-                        print(f"Local path '{item['src']}' does not exits, skipping.")
+                        print(f"Local path '{item['local']}' does not exits, skipping.")
                     continue
 
 
             if args['debug'] or args['verbose']:
-                print(f"synchronizing {item['src']}")
+                print(f"synchronizing {item['local']}")
 
             # select the first remote path
-            dst = item['dst'][0]
+            dst = item['remote'][0]
 
             # this approach need rework for remote locations (rsync over ssh)...
             if not path.exists(dst): 
@@ -141,15 +141,15 @@ class Sync:
                 params.extend(item['opts'])
 
             # fix source and destination
-            if item['src'][-1] is not '/':
-                item['src'] += '/'
+            if item['local'][-1] is not '/':
+                item['local'] += '/'
             if dst[-1] is not '/':
                 dst += '/'
             
 
             # finish with reversing direction remote -> local
             params.append(dst)
-            params.append(item['src'])
+            params.append(item['local'])
             if args['debug']:
                 pprint(params)
 

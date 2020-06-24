@@ -1,11 +1,13 @@
 import yaml
 from printy import printy, inputy
 from os import path
-from os.path import expanduser
+from os.path import expanduser, basename, normpath, abspath
+from pprint import pprint
 
 
-def init(conf_path):
-    settings = [ {"workspace_warp_database": "~/.wws_data.yaml" }, {"exclude_patterns": ["Icon?",".DS_Store"]} ]
+def init(args):
+    conf_path = args['config']
+    settings = [ {"workspace_warp_database": args['workspace_warp_database'] }, {"exclude_patterns": ["Icon?",".DS_Store"]} ]
     with open(conf_path,'w+') as f:
         f.seek(0)
         f.truncate()
@@ -24,7 +26,30 @@ def load_settings(conf_path):
         settings = yaml.load(f, Loader=yaml.FullLoader)
     return settings
 
+def migrate_database(args):
+    """ Updates the warp database  """
+    data_updated = False
+    if args['debug']:
+        pprint(args)
+    with open(args['workspace_warp_database'],'r+') as f:
+        data = yaml.load(f, Loader=yaml.FullLoader)
+        if not data:
+            return
+    
+        for entry in data:
+            if 'src' in entry:
+                entry['local'] = entry['src']
+                del entry['src']
+                data_updated = True
+            if 'dst' in entry:
+                entry['remote'] = entry['dst']
+                del entry['dst']
+                data_updated = True
 
+        if data_updated:
+            f.seek(0)
+            f.truncate()
+            yaml.dump(data, f, default_flow_style=False)
 
 def _safe_print(msg, **kwargs):
     try:
